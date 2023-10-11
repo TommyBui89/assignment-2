@@ -278,16 +278,16 @@ const styles = {
     },
     row: {
         display: 'flex',
-        borderBottom: '1px solid #ccc', // Add bottom border to each row
+        border: '1px solid #ccc',
     },
     cell: {
         flex: 1,
         padding: '10px',
-        borderRight: '1px solid #ccc', // Add right border to each cell
+        border: '1px solid #ccc',
     },
-    // Remove border from the last cell in the row
     lastCell: {
         borderRight: 'none',
+        textAlign:'center'
     }
 };
 
