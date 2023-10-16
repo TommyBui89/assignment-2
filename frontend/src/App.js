@@ -97,6 +97,7 @@ function ContactCard({ contact, deleteContact, fetchData }) {
     const [phones, setPhones] = useState([]);
     const [phoneName, setPhoneName] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
+
   
     useEffect(() => {
       fetchPhones();
@@ -116,6 +117,7 @@ function ContactCard({ contact, deleteContact, fetchData }) {
       
   
       const addPhone = async () => {
+        console.log(contact.id);
         if (!phoneName.trim() || !phoneNumber.trim()) {
             alert("Both phone name and number are required!");
             return;
@@ -162,7 +164,7 @@ function ContactCard({ contact, deleteContact, fetchData }) {
     return (
         <div style={styles.contactCard}>
             <div className="Info" onClick={() => setShowDetails(!showDetails)}>
-                {contact.name}
+                <div style={{ fontWeight: 'bold' }}>{contact.name}</div>
                 <button style={styles.contactDeleteButton} onClick={(e) => { e.stopPropagation(); deleteContact(contact.id); }}>
                     Delete
                 </button>
@@ -186,23 +188,27 @@ function ContactCard({ contact, deleteContact, fetchData }) {
                         <button style={styles.button} onClick={addPhone}>Add</button>
                     </div>
 
-                    <div style={styles.table}>
-                        <div style={styles.row}>
-                            <div style={styles.cell}>Name</div>
-                            <div style={styles.cell}>Phone Number</div>
-                            <div style={styles.cell}></div>
-                        </div>
+                    <table style={styles.table}>
+                        <thead>
+                            <tr style={styles.row}>
+                                <th style={styles.headerCell}>Name</th>
+                                <th style={styles.headerCell}>Phone Number</th>
+                                <th style={styles.headerCell}></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {phones.map(phone => (
+                                <tr key={phone.id} style={styles.row}>
+                                    <td style={styles.cell}>{phone.name}</td>
+                                    <td style={styles.cell}>{phone.number}</td>
+                                    <td style={{ ...styles.cell, ...styles.lastCell }}>
+                                        <button style={styles.buttonDelete} onClick={() => deletePhone(phone.id)}>Delete</button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
 
-                        {phones.map(phone => (
-                            <div key={phone.id} style={styles.row}>
-                                <div style={styles.cell}>{phone.name}</div>
-                                <div style={styles.cell}>{phone.number}</div>
-                                <div style={{ ...styles.cell, ...styles.lastCell }}>
-                                    <button style={styles.buttonDelete} onClick={() => deletePhone(phone.id)}>Delete</button>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
                 </>
             )}
         </div>
@@ -219,7 +225,11 @@ const styles = {
         backgroundColor: '#fff',
         padding: '20px',
         borderRadius: '10px',
-        boxShadow: '0px 0px 10px rgba(0,0,0,0.1)'
+        boxShadow: '0px 0px 10px rgba(0,0,0,0.1)',
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)'
     },
     header: {
         fontSize: '32px',
@@ -265,7 +275,7 @@ const styles = {
         justifyContent: 'space-between',
         marginTop: '10px',
         alignItems: 'center',
-        borderBottom: '1px solid #e0e0e0',
+        // borderBottom: '1px solid #e0e0e0',
         padding: '10px 0',
     },
     deleteButton: {
@@ -278,30 +288,48 @@ const styles = {
     },
     row: {
         display: 'flex',
+        // border: '1px solid #ccc',
+    },
+    headerCell: {
+        flex: 1,
+        padding: '10px',
         border: '1px solid #ccc',
+        fontWeight: 'bold',
+        textAlign: 'left'
     },
     cell: {
         flex: 1,
         padding: '10px',
         border: '1px solid #ccc',
+        display: 'flex',
+        alignItems: 'center'
     },
     lastCell: {
-        borderRight: 'none',
-        textAlign:'center'
+        // borderRight: 'none',
+        textAlign:'center',
+        margin:'0px'
     }
 };
 
 styles.buttonAdd = {
     ...styles.button,
     backgroundColor: '#4CAF50',
-    color: 'white'
+    color: 'white',
+    border: 'none',
+    padding: '10px 20px',
+    borderRadius: '5px',
+    cursor: 'pointer'
 };
 
 styles.buttonDelete = {
     ...styles.button,
-    backgroundColor: 'red',
-    color: 'white',
-    marginLeft: '10px'
+        backgroundColor: '#f44336',
+        color: 'white',
+        border: 'none',
+        padding: '10px 20px',
+        borderRadius: '5px',
+        cursor: 'pointer'
+
 };
 
 styles.contactDeleteButton = {
