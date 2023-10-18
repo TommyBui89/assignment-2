@@ -57,12 +57,17 @@ exports.update = (req, res) => {
 // Delete one contact by id
 exports.delete = (req, res) => {
     const id = req.params.contactId;
-    Contacts.destroy({
-        where: {id:id},
-    })
-    .then((num) => {
-        if (num === 1) res.send({message: "contact was deleted successfully"})
-        else res.send ({message:'cannot delete contact with id=%{id}.'})
-    })
-    .catch((err) => res.status(500).send({message: err.message }));
+
+    // First, delete all phones associated with the contact
+    Phones.destroy({ where: { contactId: id } })
+        .then(() => {
+            // Then, delete the contact itself
+            return Contacts.destroy({ where: { id: id } });
+        })
+        .then((num) => {
+            if (num === 1) res.send({ message: "contact was deleted successfully" });
+            else res.send({ message: `cannot delete contact with id=${id}.` });
+        })
+        .catch((err) => res.status(500).send({ message: err.message }));
 };
+

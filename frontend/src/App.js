@@ -20,7 +20,7 @@ function App() {
   
     useEffect(() => {
       fetchContacts();
-    }, [fetchContacts]);
+    }, []);
 
     const createContact = async (name) => {
         try {
