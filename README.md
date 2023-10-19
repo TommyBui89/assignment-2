@@ -1,15 +1,13 @@
-# assignment-2
-Phone Management System
-About the System
-The Phone Management System is a contemporary solution designed to seamlessly manage and organize your contacts and their phone details. This program is the culmination of modern design principles, with a user-friendly interface and robust backend capabilities.
+# Phone Management System 📱
 
-Features
-Contact Creation: Easily add new contacts with a straightforward form.
-Phone Detail Management: For each contact, store multiple phone details. This includes the phone's name (e.g., 'home', 'work') and the actual number.
-Instant Retrieval: Quickly fetch all phones associated with a contact.
-Dynamic Updates: Update phone details on the fly.
-Sleek Deletion Process: Remove contacts or their associated phone details with just one click.
-Built With
-React: For an interactive and responsive frontend.
-Node.js and Express: A robust backend to handle data management.
-Sequelize ORM: For seamless database operations.
+## Description
+
+The **Phone Management System** provides a streamlined approach to handle contacts and their respective phone numbers. Designed to bridge the gap between simplicity and functionality, it offers users the ability to:
+
+- **Add Contacts**: Easily input new contacts into the system.
+- **Manage Phone Details**: Attach multiple phone details to each contact, such as home, work, or mobile numbers.
+- **Retrieve Phone Numbers**: Access all phone details linked to a specific contact efficiently.
+- **Update Contacts**: Modify the details of any contact or their phone numbers with ease.
+- **Delete**: Remove contacts or specific phone details without hassle.
+
+Built with modern design principles and a user-centric approach, the Phone Management System is your go-to solution for all contact and phone number management needs.
